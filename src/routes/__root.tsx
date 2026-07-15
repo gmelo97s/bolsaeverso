@@ -78,12 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Bolsas Femininas | Loja Online" },
-      { name: "description", content: "Coleção de bolsas de couro artesanais. Elegância atemporal em cada peça." },
+      { name: "description", content: "Descubra nossa coleção de bolsas de couro artesanais. Elegância italiana em cada peça." },
       { property: "og:title", content: "Bolsas Femininas | Loja Online" },
-      { property: "og:description", content: "Coleção de bolsas de couro artesanais." },
+      { property: "og:description", content: "Descubra nossa coleção de bolsas de couro artesanais. Elegância italiana em cada peça." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Bolsas Femininas | Loja Online" },
+      { name: "twitter:description", content: "Descubra nossa coleção de bolsas de couro artesanais. Elegância italiana em cada peça." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/61856c9b-4c95-4682-be82-a1fc0a0fbbf1/id-preview-d3843714--f1546e59-8fe0-4d0f-9c55-b4fdf6c81491.lovable.app-1784049954644.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/61856c9b-4c95-4682-be82-a1fc0a0fbbf1/id-preview-d3843714--f1546e59-8fe0-4d0f-9c55-b4fdf6c81491.lovable.app-1784049954644.png" },
     ],
     links: [
       {
