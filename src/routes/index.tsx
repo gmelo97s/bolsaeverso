@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
-  Menu, Search, X, ChevronRight, ChevronLeft, MapPin,
-  Phone, Globe, Instagram, ShoppingBag, Plus, Minus, Trash2,
+  Menu, Search, X, ChevronRight, MapPin,
+  Globe, Instagram, ShoppingBag, Plus, Minus, Trash2, Check, ArrowUpDown,
 } from "lucide-react";
+
+import logoBV from "@/assets/logo-bv.png";
 
 import zadig from "@/assets/bolsas/Bolsa_Zadig_Voltare_Sunny_69_90.jpeg";
 import saintLaurent from "@/assets/bolsas/Bolsa_Saint_Laurent_Icare_Tote_Bag_Versão_Trançada_89_90.jpeg";
@@ -15,28 +17,41 @@ import trio49 from "@/assets/bolsas/49_90_cada.jpeg";
 import conjunto39 from "@/assets/bolsas/39_90_cada_ou_105_00_o_conjunto.jpeg";
 import tote129 from "@/assets/bolsas/129_90_2.jpeg";
 import hobo129 from "@/assets/bolsas/129_90.jpeg";
+import black6990 from "@/assets/bolsas/69_90_3.jpeg";
+import toteBege from "@/assets/bolsas/89_90_tote.jpeg";
+import besslina from "@/assets/bolsas/69_90_besslina.jpeg";
+import pretaNo from "@/assets/bolsas/69_90_preta.jpeg";
+import mochila2em1 from "@/assets/bolsas/mochila_2em1_129_90.jpeg";
+import laceHobo from "@/assets/bolsas/lace_lore_hobo_89_90.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "F&C · Bolsas Femininas" },
-      { name: "description", content: "Coleção exclusiva de bolsas femininas F&C." },
+      { title: "Bolsa & Verso · Bolsas Femininas" },
+      { name: "description", content: "Coleção exclusiva de bolsas femininas Bolsa & Verso." },
     ],
   }),
   component: Home,
 });
 
-type Product = { id: string; name: string; price: number; priceLabel: string; img: string };
+type Product = { id: string; name: string; price: number; priceLabel: string; img: string; isNew?: boolean };
 
+// Ordem: lançamentos primeiro (isNew)
 const products: Product[] = [
+  { id: "black-6990", name: "Bolsa Executiva Preta com Fecho Dourado", price: 69.9, priceLabel: "R$ 69,90", img: black6990, isNew: true },
+  { id: "tote-bege", name: "Bolsa Tote Bege com Carteira", price: 89.9, priceLabel: "R$ 89,90", img: toteBege, isNew: true },
+  { id: "besslina", name: "Bolsa Besslina Hobo Redonda", price: 69.9, priceLabel: "R$ 69,90", img: besslina, isNew: true },
+  { id: "preta-no", name: "Bolsa Preta com Nó Trançado", price: 69.9, priceLabel: "R$ 69,90", img: pretaNo, isNew: true },
+  { id: "mochila-2em1", name: "Bolsa Mochila 2 em 1 Caramelo", price: 129.9, priceLabel: "R$ 129,90", img: mochila2em1, isNew: true },
+  { id: "lace-hobo", name: "Bolsa Lace Lore Hobo Monograma", price: 89.9, priceLabel: "R$ 89,90", img: laceHobo, isNew: true },
   { id: "zadig", name: "Bolsa Zadig Voltare Sunny", price: 69.9, priceLabel: "R$ 69,90", img: zadig },
-  { id: "saint-laurent", name: "Bolsa Saint Laurent Icare Tote Bag — Trançada", price: 89.9, priceLabel: "R$ 89,90", img: saintLaurent },
+  { id: "saint-laurent", name: "Bolsa Saint Laurent Icare Tote — Trançada", price: 89.9, priceLabel: "R$ 89,90", img: saintLaurent },
   { id: "laura-loren", name: "Bolsa Off White Laura Loren", price: 89.9, priceLabel: "R$ 89,90", img: lauraLoren },
   { id: "bella-paula", name: "Bolsa Bella Paula", price: 69.9, priceLabel: "R$ 69,90", img: bellaPaula },
   { id: "lace-lenco", name: "Lace Lore — Com Lenço", price: 89.9, priceLabel: "R$ 89,90", img: laceLenco },
   { id: "lace-ombro", name: "Lace Lore — Alça no Ombro", price: 89.9, priceLabel: "R$ 89,90", img: laceOmbro },
   { id: "trio-49", name: "Bolsa Chain Flap (marrom, off-white ou terracota)", price: 49.9, priceLabel: "R$ 49,90 cada", img: trio49 },
-  { id: "conjunto-39", name: "Bolsa Matelassê Taupe (P, M ou G)", price: 39.9, priceLabel: "R$ 39,90 cada · R$ 105,00 o conjunto", img: conjunto39 },
+  { id: "conjunto-39", name: "Bolsa Matelassê Taupe (P, M ou G)", price: 39.9, priceLabel: "R$ 39,90 · R$ 105,00 conjunto", img: conjunto39 },
   { id: "tote-129", name: "Bolsa Tote Caramelo com Tassel", price: 129.9, priceLabel: "R$ 129,90", img: tote129 },
   { id: "hobo-129", name: "Bolsa Hobo Chocolate", price: 129.9, priceLabel: "R$ 129,90", img: hobo129 },
 ];
@@ -48,12 +63,29 @@ const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 
 type View = "products" | "menu" | "search";
 type CartItem = { product: Product; qty: number };
+type SortKey = "novidades" | "maior" | "menor";
+
+const SORT_LABEL: Record<SortKey, string> = {
+  novidades: "Lançamentos",
+  maior: "Maior preço",
+  menor: "Menor preço",
+};
+
+function sortProducts(list: Product[], key: SortKey) {
+  const copy = [...list];
+  if (key === "maior") copy.sort((a, b) => b.price - a.price);
+  else if (key === "menor") copy.sort((a, b) => a.price - b.price);
+  else copy.sort((a, b) => Number(!!b.isNew) - Number(!!a.isNew));
+  return copy;
+}
 
 function Home() {
   const [view, setView] = useState<View>("products");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [detail, setDetail] = useState<Product | null>(null);
+  const [toast, setToast] = useState<Product | null>(null);
+  const [sort, setSort] = useState<SortKey>("novidades");
 
   const addToCart = (p: Product) => {
     setCart((c) => {
@@ -61,10 +93,17 @@ function Home() {
       if (existing) return c.map((i) => i.product.id === p.id ? { ...i, qty: i.qty + 1 } : i);
       return [...c, { product: p, qty: 1 }];
     });
-    setCartOpen(true);
+    setToast(p);
   };
 
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 2600);
+    return () => clearTimeout(t);
+  }, [toast]);
+
   const cartCount = cart.reduce((n, i) => n + i.qty, 0);
+  const sorted = useMemo(() => sortProducts(products, sort), [sort]);
 
   return (
     <div className="min-h-screen bg-background text-foreground max-w-md mx-auto relative">
@@ -73,7 +112,7 @@ function Home() {
         cartCount={cartCount} onCartOpen={() => setCartOpen(true)}
       />
       {view === "products" && (
-        <ProductsView onDetails={setDetail} onAdd={addToCart} />
+        <ProductsView list={sorted} sort={sort} setSort={setSort} onDetails={setDetail} onAdd={addToCart} />
       )}
       {view === "menu" && <MenuView setView={setView} onCartOpen={() => setCartOpen(true)} />}
       {view === "search" && <SearchView setView={setView} onDetails={setDetail} onAdd={addToCart} />}
@@ -85,6 +124,7 @@ function Home() {
         open={cartOpen} onClose={() => setCartOpen(false)}
         cart={cart} setCart={setCart}
       />
+      <AddToast item={toast} onOpenCart={() => { setToast(null); setCartOpen(true); }} onClose={() => setToast(null)} />
     </div>
   );
 }
@@ -95,7 +135,7 @@ function Header({ view, setView, cartCount, onCartOpen }: {
   const isOverlay = view !== "products";
   return (
     <header className="sticky top-0 z-40 bg-background border-b border-border">
-      <div className="flex items-center justify-between px-4 h-14">
+      <div className="flex items-center justify-between px-4 h-16">
         <div className="flex items-center gap-5">
           <button aria-label="Menu" onClick={() => setView(isOverlay ? "products" : "menu")}>
             {isOverlay ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
@@ -105,17 +145,18 @@ function Header({ view, setView, cartCount, onCartOpen }: {
           </button>
         </div>
         {!isOverlay && (
-          <h1 className="font-serif text-2xl tracking-[0.25em] font-normal">F&amp;C</h1>
+          <img src={logoBV} alt="Bolsa & Verso" className="h-10 w-auto object-contain" />
         )}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4">
           <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" aria-label="WhatsApp"
-             className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center">
-            <WhatsAppIcon size={14} />
+             className="flex items-center justify-center">
+            <WhatsAppIcon size={20} />
           </a>
-          <a href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram">
+          <a href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram"
+             className="flex items-center justify-center">
             <Instagram size={20} strokeWidth={1.5} />
           </a>
-          <button aria-label="Sacola" onClick={onCartOpen} className="relative">
+          <button aria-label="Sacola" onClick={onCartOpen} className="relative flex items-center justify-center">
             <ShoppingBag size={20} strokeWidth={1.5} />
             {cartCount > 0 && (
               <span className="absolute -top-1.5 -right-1.5 bg-foreground text-background text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
@@ -129,27 +170,60 @@ function Header({ view, setView, cartCount, onCartOpen }: {
   );
 }
 
-function WhatsAppIcon({ size = 16 }: { size?: number }) {
+function WhatsAppIcon({ size = 20 }: { size?: number }) {
+  // Outline style — matches lucide stroke visual weight of neighboring icons
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size}
-         fill="currentColor" aria-hidden="true">
-      <path d="M20.52 3.48A11.86 11.86 0 0 0 12.04 0C5.5 0 .2 5.3.2 11.84c0 2.08.55 4.11 1.6 5.9L0 24l6.42-1.68a11.83 11.83 0 0 0 5.62 1.43h.01c6.53 0 11.83-5.3 11.83-11.83 0-3.16-1.23-6.13-3.36-8.44ZM12.05 21.5h-.01a9.66 9.66 0 0 1-4.92-1.35l-.35-.21-3.81 1 1.02-3.71-.23-.38a9.6 9.6 0 0 1-1.48-5.02c0-5.31 4.32-9.63 9.79-9.63 2.62 0 5.07 1.02 6.92 2.87a9.7 9.7 0 0 1 2.86 6.85c0 5.31-4.32 9.63-9.79 9.63Zm5.36-7.22c-.29-.15-1.74-.86-2.01-.96-.27-.1-.47-.15-.66.15-.2.29-.76.96-.93 1.16-.17.2-.34.22-.63.07-.29-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.44.13-.58.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.36-.02-.51-.07-.15-.66-1.6-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.36-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.06 2.86 1.2 3.06.15.2 2.08 3.18 5.03 4.46.7.3 1.25.48 1.68.61.71.23 1.36.2 1.87.12.57-.08 1.74-.71 1.99-1.4.24-.68.24-1.27.17-1.4-.07-.13-.27-.2-.56-.36Z"/>
+         fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+         aria-hidden="true">
+      <path d="M3 21l1.65-4.5A9 9 0 1 1 8.5 20.35L3 21z" />
+      <path d="M9 10c.5 2 2 3.5 4 4l1.5-1.2a1 1 0 0 1 1-.2l2.4.9a1 1 0 0 1 .6 1.1c-.3 1.6-1.8 2.4-3.5 2.4-3.9 0-8-4.1-8-8 0-1.7.8-3.2 2.4-3.5a1 1 0 0 1 1.1.6l.9 2.4a1 1 0 0 1-.2 1L9 10z" />
     </svg>
   );
 }
 
-function ProductsView({ onDetails, onAdd }: { onDetails: (p: Product) => void; onAdd: (p: Product) => void }) {
+function SortMenu({ sort, setSort }: { sort: SortKey; setSort: (s: SortKey) => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="relative">
+      <button onClick={() => setOpen((o) => !o)}
+              className="flex items-center gap-1.5 hover:opacity-70 transition-opacity">
+        <ArrowUpDown size={12} strokeWidth={1.5} />
+        <span>ORDENAR: {SORT_LABEL[sort].toUpperCase()}</span>
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-full mt-2 z-40 w-48 bg-background border border-border shadow-lg animate-scale-in origin-top-right">
+            {(Object.keys(SORT_LABEL) as SortKey[]).map((k) => (
+              <button key={k}
+                      onClick={() => { setSort(k); setOpen(false); }}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-[12px] tracking-wider hover:bg-muted transition-colors ${
+                        sort === k ? "bg-muted" : ""
+                      }`}>
+                <span>{SORT_LABEL[k]}</span>
+                {sort === k && <Check size={14} strokeWidth={1.5} />}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function ProductsView({ list, sort, setSort, onDetails, onAdd }: {
+  list: Product[]; sort: SortKey; setSort: (s: SortKey) => void;
+  onDetails: (p: Product) => void; onAdd: (p: Product) => void;
+}) {
   return (
     <main>
       <div className="flex items-center justify-between px-4 py-4 text-xs tracking-wider">
-        <span>{products.length} PRODUTOS</span>
-        <a href={MAPS_URL} target="_blank" rel="noreferrer"
-           className="flex items-center gap-1 hover:underline">
-          <MapPin size={12} strokeWidth={1.5} /> SÃO BERNARDO DO CAMPO
-        </a>
+        <span>{list.length} PRODUTOS</span>
+        <SortMenu sort={sort} setSort={setSort} />
       </div>
       <div className="grid grid-cols-2 gap-px bg-border">
-        {products.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
+        {list.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
       </div>
       <AddressFooter />
     </main>
@@ -165,6 +239,11 @@ function ProductCard({ p, onDetails, onAdd }: {
               className="relative aspect-square bg-surface overflow-hidden group">
         <img src={p.img} alt={p.name} loading="lazy"
              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        {p.isNew && (
+          <span className="absolute top-2 left-2 bg-foreground text-background text-[9px] tracking-[0.15em] px-1.5 py-0.5">
+            NOVO
+          </span>
+        )}
       </button>
       <h3 className="mt-3 text-[13px] leading-tight min-h-[2.6em]">{p.name}</h3>
       <p className="mt-1 text-[13px] font-medium">{p.priceLabel}</p>
@@ -179,6 +258,32 @@ function ProductCard({ p, onDetails, onAdd }: {
         </button>
       </div>
     </article>
+  );
+}
+
+function AddToast({ item, onOpenCart, onClose }: {
+  item: Product | null; onOpenCart: () => void; onClose: () => void;
+}) {
+  if (!item) return null;
+  return (
+    <div className="fixed left-1/2 -translate-x-1/2 bottom-6 z-[60] w-[92%] max-w-sm animate-slide-in-up">
+      <div className="bg-background border border-border shadow-2xl flex items-center gap-3 p-3">
+        <div className="w-9 h-9 rounded-full bg-foreground text-background flex items-center justify-center shrink-0 animate-scale-in">
+          <Check size={16} strokeWidth={2} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-[11px] tracking-[0.15em] text-muted-foreground">ADICIONADO</p>
+          <p className="text-[13px] leading-tight truncate">{item.name}</p>
+        </div>
+        <button onClick={onOpenCart}
+                className="text-[11px] tracking-widest border border-foreground px-3 py-2 hover:bg-foreground hover:text-background transition-colors">
+          VER
+        </button>
+        <button onClick={onClose} aria-label="Fechar" className="text-muted-foreground hover:text-foreground">
+          <X size={16} strokeWidth={1.5} />
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -209,7 +314,7 @@ function ProductDetail({ product, onClose, onAdd }: {
             <h2 className="font-serif text-2xl leading-tight">{product.name}</h2>
             <p className="mt-2 text-lg">{product.priceLabel}</p>
             <p className="mt-4 text-[13px] text-muted-foreground leading-relaxed">
-              Peça exclusiva da coleção F&amp;C. Feita para acompanhar você em cada ocasião com elegância atemporal.
+              Peça exclusiva da coleção Bolsa &amp; Verso. Feita para acompanhar você em cada ocasião com elegância atemporal.
             </p>
             <button onClick={() => { onAdd(product); onClose(); }}
                     className="mt-6 w-full py-3.5 text-[12px] tracking-[0.2em] bg-foreground text-background hover:opacity-90 transition-opacity">
@@ -341,9 +446,9 @@ function CartDrawer({ open, onClose, cart, setCart }: {
 
 function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartOpen: () => void }) {
   return (
-    <div className="fixed inset-0 top-14 bg-background z-30 max-w-md mx-auto overflow-y-auto">
+    <div className="fixed inset-0 top-16 bg-background z-30 max-w-md mx-auto overflow-y-auto">
       <nav className="px-6 pt-6">
-        {["Novidades", "Bolsas", "Coleção F&C"].map((label) => (
+        {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
           <button key={label} onClick={() => setView("products")}
                   className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
             <span className="font-medium">{label}</span>
@@ -359,7 +464,7 @@ function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartO
           <Instagram size={18} strokeWidth={1.5} /><span>@fesoncini</span>
         </a>
         <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
-          <WhatsAppIcon size={16} /><span>WhatsApp (11) 98859-7788</span>
+          <WhatsAppIcon size={18} /><span>WhatsApp (11) 98859-7788</span>
         </a>
         <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex items-start gap-4 py-1">
           <MapPin size={18} strokeWidth={1.5} className="mt-0.5" />
@@ -379,7 +484,9 @@ function SearchView({ setView, onDetails, onAdd }: {
   onAdd: (p: Product) => void;
 }) {
   const [q, setQ] = useState("");
-  const filtered = products.filter((p) => p.name.toLowerCase().includes(q.toLowerCase()));
+  const filtered = q.trim() === "" ? products : products.filter((p) => p.name.toLowerCase().includes(q.toLowerCase()));
+  const single = filtered.length === 1;
+
   return (
     <div className="fixed inset-0 top-0 bg-background z-50 max-w-md mx-auto overflow-y-auto">
       <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
@@ -390,10 +497,51 @@ function SearchView({ setView, onDetails, onAdd }: {
           FECHAR
         </button>
       </div>
-      <div className="grid grid-cols-2 gap-px bg-border">
-        {filtered.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
-      </div>
+      {filtered.length === 0 ? (
+        <div className="p-10 text-center text-sm text-muted-foreground">
+          Nenhum resultado para "{q}".
+        </div>
+      ) : single ? (
+        <SearchSingle p={filtered[0]} onDetails={onDetails} onAdd={onAdd} />
+      ) : (
+        <div className="grid grid-cols-2 gap-px bg-border">
+          {filtered.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
+        </div>
+      )}
     </div>
+  );
+}
+
+function SearchSingle({ p, onDetails, onAdd }: {
+  p: Product; onDetails: (p: Product) => void; onAdd: (p: Product) => void;
+}) {
+  return (
+    <article className="flex flex-col animate-fade-in">
+      <button onClick={() => onDetails(p)}
+              className="relative w-full aspect-square bg-surface overflow-hidden">
+        <img src={p.img} alt={p.name}
+             className="w-full h-full object-cover" />
+        {p.isNew && (
+          <span className="absolute top-3 left-3 bg-foreground text-background text-[10px] tracking-[0.15em] px-2 py-1">
+            NOVO
+          </span>
+        )}
+      </button>
+      <div className="px-5 py-5">
+        <h2 className="font-serif text-2xl leading-tight">{p.name}</h2>
+        <p className="mt-2 text-[15px]">{p.priceLabel}</p>
+        <div className="mt-5 grid grid-cols-2 gap-2">
+          <button onClick={() => onAdd(p)}
+                  className="py-3 text-[11px] tracking-widest bg-foreground text-background hover:opacity-90 transition-opacity">
+            ADICIONAR
+          </button>
+          <button onClick={() => onDetails(p)}
+                  className="py-3 text-[11px] tracking-widest border border-foreground hover:bg-foreground hover:text-background transition-colors">
+            DETALHES
+          </button>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -405,18 +553,16 @@ function AddressFooter() {
          className="inline-flex items-center gap-2 text-[13px] hover:underline">
         <MapPin size={14} strokeWidth={1.5} /> {ADDRESS}
       </a>
-      <div className="flex items-center justify-center gap-4 pt-3">
-        <a href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram">
-          <Instagram size={18} strokeWidth={1.5} />
+      <div className="flex items-center justify-center gap-5 pt-3">
+        <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+          <WhatsAppIcon size={20} />
         </a>
-        <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer"
-           aria-label="WhatsApp"
-           className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center">
-          <WhatsAppIcon size={14} />
+        <a href={INSTAGRAM} target="_blank" rel="noreferrer" aria-label="Instagram">
+          <Instagram size={20} strokeWidth={1.5} />
         </a>
       </div>
       <p className="pt-4 text-[10px] tracking-widest text-muted-foreground">
-        © 2026 F&amp;C · TODOS OS DIREITOS RESERVADOS
+        © 2026 BOLSA &amp; VERSO · TODOS OS DIREITOS RESERVADOS
       </p>
     </footer>
   );
