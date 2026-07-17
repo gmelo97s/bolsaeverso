@@ -219,12 +219,12 @@ function ProductsView({ list, sort, setSort, onDetails, onAdd }: {
   onDetails: (p: Product) => void; onAdd: (p: Product) => void;
 }) {
   return (
-    <main>
-      <div className="flex items-center justify-between px-4 py-4 text-xs tracking-wider">
+    <main className="max-w-7xl mx-auto">
+      <div className="flex items-center justify-between px-4 md:px-8 py-4 text-xs tracking-wider">
         <span>{list.length} PRODUTOS</span>
         <SortMenu sort={sort} setSort={setSort} />
       </div>
-      <div className="grid grid-cols-2 gap-px bg-border">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
         {list.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
       </div>
       <AddressFooter />
