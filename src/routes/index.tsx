@@ -268,21 +268,28 @@ function AddToast({ item, onOpenCart, onClose }: {
 }) {
   if (!item) return null;
   return (
-    <div className="fixed left-1/2 -translate-x-1/2 bottom-6 z-[60] w-[92%] max-w-sm animate-slide-in-up">
-      <div className="bg-background border border-border shadow-2xl flex items-center gap-3 p-3">
-        <div className="w-9 h-9 rounded-full bg-foreground text-background flex items-center justify-center shrink-0 animate-scale-in">
-          <Check size={16} strokeWidth={2} />
+    <div
+      className="fixed left-1/2 z-[60] animate-slide-in-up px-2"
+      style={{
+        bottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)",
+        transform: "translateX(-50%)",
+        width: "min(calc(100vw - 24px), 420px)",
+      }}
+    >
+      <div className="bg-background border border-border shadow-2xl flex items-center gap-2 p-2.5 rounded-sm">
+        <div className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center shrink-0 animate-scale-in">
+          <Check size={14} strokeWidth={2} />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[11px] tracking-[0.15em] text-muted-foreground">ADICIONADO</p>
-          <p className="text-[13px] leading-tight truncate">{item.name}</p>
+          <p className="text-[10px] tracking-[0.15em] text-muted-foreground">ADICIONADO</p>
+          <p className="text-[12px] leading-tight truncate">{item.name}</p>
         </div>
         <button onClick={onOpenCart}
-                className="text-[11px] tracking-widest border border-foreground px-3 py-2 hover:bg-foreground hover:text-background transition-colors">
+                className="shrink-0 text-[10px] tracking-widest border border-foreground px-2.5 py-1.5 hover:bg-foreground hover:text-background transition-colors">
           VER
         </button>
-        <button onClick={onClose} aria-label="Fechar" className="text-muted-foreground hover:text-foreground">
-          <X size={16} strokeWidth={1.5} />
+        <button onClick={onClose} aria-label="Fechar" className="shrink-0 text-muted-foreground hover:text-foreground">
+          <X size={14} strokeWidth={1.5} />
         </button>
       </div>
     </div>
