@@ -135,8 +135,8 @@ function Header({ view, setView, cartCount, onCartOpen }: {
   const isOverlay = view !== "products";
   return (
     <header className="sticky top-0 z-40 bg-background border-b border-border">
-      <div className="flex items-center justify-between px-4 h-16">
-        <div className="flex items-center gap-5">
+      <div className="flex items-center justify-between px-4 md:px-8 h-16 md:h-20 max-w-7xl mx-auto">
+        <div className="flex items-center gap-5 flex-1 min-w-0">
           <button aria-label="Menu" onClick={() => setView(isOverlay ? "products" : "menu")}>
             {isOverlay ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
           </button>
@@ -145,9 +145,11 @@ function Header({ view, setView, cartCount, onCartOpen }: {
           </button>
         </div>
         {!isOverlay && (
-          <img src={logoBV} alt="Bolsa & Verso" className="h-10 w-auto object-contain" />
+          <div className="font-serif tracking-[0.28em] text-[15px] md:text-xl uppercase whitespace-nowrap px-2">
+            Bolsa <span className="mx-0.5">&amp;</span> Verso
+          </div>
         )}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 md:gap-5 flex-1 justify-end">
           <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" aria-label="WhatsApp"
              className="flex items-center justify-center">
             <WhatsAppIcon size={20} />
@@ -159,7 +161,7 @@ function Header({ view, setView, cartCount, onCartOpen }: {
           <button aria-label="Sacola" onClick={onCartOpen} className="relative flex items-center justify-center">
             <ShoppingBag size={20} strokeWidth={1.5} />
             {cartCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-foreground text-background text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1.5 -right-1.5 bg-[#e11d2e] text-white text-[10px] font-medium w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
                 {cartCount}
               </span>
             )}
