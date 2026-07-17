@@ -319,7 +319,7 @@ function ProductDetail({ product, onClose, onAdd }: {
             <img src={product.img} alt={product.name}
                  className={`w-full h-full object-cover transition-transform duration-500 ${zoom ? "scale-[1.8]" : "scale-100"}`} />
           </div>
-          <div className="px-5 py-6">
+          <div className="px-5 py-6 md:px-8 md:py-10 md:flex-1 md:overflow-y-auto">
             <h2 className="font-serif text-2xl leading-tight">{product.name}</h2>
             <p className="mt-2 text-lg">{product.priceLabel}</p>
             <p className="mt-4 text-[13px] text-muted-foreground leading-relaxed">
