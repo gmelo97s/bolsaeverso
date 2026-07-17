@@ -456,7 +456,7 @@ function CartDrawer({ open, onClose, cart, setCart }: {
 function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartOpen: () => void }) {
   return (
     <div className="fixed inset-0 top-16 md:top-20 bg-background z-30 overflow-y-auto">
-      <nav className="px-6 pt-6">
+      <nav className="px-6 md:px-8 pt-6 max-w-2xl mx-auto">
         {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
           <button key={label} onClick={() => setView("products")}
                   className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
@@ -465,7 +465,7 @@ function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartO
           </button>
         ))}
       </nav>
-      <div className="px-6 mt-10 space-y-5 text-[13px] pb-16">
+      <div className="px-6 md:px-8 mt-10 space-y-5 text-[13px] pb-16 max-w-2xl mx-auto">
         <button onClick={onCartOpen} className="flex items-center gap-4 py-1">
           <ShoppingBag size={18} strokeWidth={1.5} /><span>Sacola</span>
         </button>
