@@ -313,8 +313,8 @@ function ProductDetail({ product, onClose, onAdd }: {
                 className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-background/90 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors">
           <X size={18} strokeWidth={1.5} />
         </button>
-        <div className="overflow-y-auto max-h-[92vh]">
-          <div className="relative aspect-square bg-surface overflow-hidden cursor-zoom-in"
+        <div className="overflow-y-auto max-h-[92vh] md:flex md:max-h-[85vh]">
+          <div className="relative aspect-square md:aspect-auto md:w-1/2 md:h-[85vh] bg-surface overflow-hidden cursor-zoom-in shrink-0"
                onClick={() => setZoom((z) => !z)}>
             <img src={product.img} alt={product.name}
                  className={`w-full h-full object-cover transition-transform duration-500 ${zoom ? "scale-[1.8]" : "scale-100"}`} />
