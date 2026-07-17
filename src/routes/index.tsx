@@ -5,7 +5,7 @@ import {
   Globe, Instagram, ShoppingBag, Plus, Minus, Trash2, Check, ArrowUpDown,
 } from "lucide-react";
 
-import logoBV from "@/assets/logo-bv.png";
+
 
 import zadig from "@/assets/bolsas/Bolsa_Zadig_Voltare_Sunny_69_90.jpeg";
 import saintLaurent from "@/assets/bolsas/Bolsa_Saint_Laurent_Icare_Tote_Bag_Versão_Trançada_89_90.jpeg";
@@ -106,7 +106,7 @@ function Home() {
   const sorted = useMemo(() => sortProducts(products, sort), [sort]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground max-w-md mx-auto relative">
+    <div className="min-h-screen bg-background text-foreground mx-auto relative w-full">
       <Header
         view={view} setView={setView}
         cartCount={cartCount} onCartOpen={() => setCartOpen(true)}
@@ -135,8 +135,8 @@ function Header({ view, setView, cartCount, onCartOpen }: {
   const isOverlay = view !== "products";
   return (
     <header className="sticky top-0 z-40 bg-background border-b border-border">
-      <div className="flex items-center justify-between px-4 h-16">
-        <div className="flex items-center gap-5">
+      <div className="flex items-center justify-between px-4 md:px-8 h-16 md:h-20 max-w-7xl mx-auto">
+        <div className="flex items-center gap-5 flex-1 min-w-0">
           <button aria-label="Menu" onClick={() => setView(isOverlay ? "products" : "menu")}>
             {isOverlay ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
           </button>
@@ -145,9 +145,11 @@ function Header({ view, setView, cartCount, onCartOpen }: {
           </button>
         </div>
         {!isOverlay && (
-          <img src={logoBV} alt="Bolsa & Verso" className="h-10 w-auto object-contain" />
+          <div className="font-serif tracking-[0.28em] text-[15px] md:text-xl uppercase whitespace-nowrap px-2">
+            Bolsa <span className="mx-0.5">&amp;</span> Verso
+          </div>
         )}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 md:gap-5 flex-1 justify-end">
           <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" aria-label="WhatsApp"
              className="flex items-center justify-center">
             <WhatsAppIcon size={20} />
@@ -159,7 +161,7 @@ function Header({ view, setView, cartCount, onCartOpen }: {
           <button aria-label="Sacola" onClick={onCartOpen} className="relative flex items-center justify-center">
             <ShoppingBag size={20} strokeWidth={1.5} />
             {cartCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-foreground text-background text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1.5 -right-1.5 bg-[#e11d2e] text-white text-[10px] font-medium w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
                 {cartCount}
               </span>
             )}
@@ -217,12 +219,12 @@ function ProductsView({ list, sort, setSort, onDetails, onAdd }: {
   onDetails: (p: Product) => void; onAdd: (p: Product) => void;
 }) {
   return (
-    <main>
-      <div className="flex items-center justify-between px-4 py-4 text-xs tracking-wider">
+    <main className="max-w-7xl mx-auto">
+      <div className="flex items-center justify-between px-4 md:px-8 py-4 text-xs tracking-wider">
         <span>{list.length} PRODUTOS</span>
         <SortMenu sort={sort} setSort={setSort} />
       </div>
-      <div className="grid grid-cols-2 gap-px bg-border">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
         {list.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
       </div>
       <AddressFooter />
@@ -266,21 +268,28 @@ function AddToast({ item, onOpenCart, onClose }: {
 }) {
   if (!item) return null;
   return (
-    <div className="fixed left-1/2 -translate-x-1/2 bottom-6 z-[60] w-[92%] max-w-sm animate-slide-in-up">
-      <div className="bg-background border border-border shadow-2xl flex items-center gap-3 p-3">
-        <div className="w-9 h-9 rounded-full bg-foreground text-background flex items-center justify-center shrink-0 animate-scale-in">
-          <Check size={16} strokeWidth={2} />
+    <div
+      className="fixed left-1/2 z-[60] animate-slide-in-up px-2"
+      style={{
+        bottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)",
+        transform: "translateX(-50%)",
+        width: "min(calc(100vw - 24px), 420px)",
+      }}
+    >
+      <div className="bg-background border border-border shadow-2xl flex items-center gap-2 p-2.5 rounded-sm">
+        <div className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center shrink-0 animate-scale-in">
+          <Check size={14} strokeWidth={2} />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[11px] tracking-[0.15em] text-muted-foreground">ADICIONADO</p>
-          <p className="text-[13px] leading-tight truncate">{item.name}</p>
+          <p className="text-[10px] tracking-[0.15em] text-muted-foreground">ADICIONADO</p>
+          <p className="text-[12px] leading-tight truncate">{item.name}</p>
         </div>
         <button onClick={onOpenCart}
-                className="text-[11px] tracking-widest border border-foreground px-3 py-2 hover:bg-foreground hover:text-background transition-colors">
+                className="shrink-0 text-[10px] tracking-widest border border-foreground px-2.5 py-1.5 hover:bg-foreground hover:text-background transition-colors">
           VER
         </button>
-        <button onClick={onClose} aria-label="Fechar" className="text-muted-foreground hover:text-foreground">
-          <X size={16} strokeWidth={1.5} />
+        <button onClick={onClose} aria-label="Fechar" className="shrink-0 text-muted-foreground hover:text-foreground">
+          <X size={14} strokeWidth={1.5} />
         </button>
       </div>
     </div>
@@ -298,19 +307,19 @@ function ProductDetail({ product, onClose, onAdd }: {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
          style={{ background: "color-mix(in oklab, black 40%, transparent)", backdropFilter: "blur(14px)" }}>
-      <div className="relative w-full max-w-md bg-background rounded-lg overflow-hidden shadow-2xl animate-scale-in"
+      <div className="relative w-full max-w-md md:max-w-4xl bg-background rounded-lg overflow-hidden shadow-2xl animate-scale-in"
            style={{ maxHeight: "92vh" }}>
         <button onClick={onClose} aria-label="Fechar"
                 className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-background/90 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors">
           <X size={18} strokeWidth={1.5} />
         </button>
-        <div className="overflow-y-auto max-h-[92vh]">
-          <div className="relative aspect-square bg-surface overflow-hidden cursor-zoom-in"
+        <div className="overflow-y-auto max-h-[92vh] md:flex md:max-h-[85vh]">
+          <div className="relative aspect-square md:aspect-auto md:w-1/2 md:h-[85vh] bg-surface overflow-hidden cursor-zoom-in shrink-0"
                onClick={() => setZoom((z) => !z)}>
             <img src={product.img} alt={product.name}
                  className={`w-full h-full object-cover transition-transform duration-500 ${zoom ? "scale-[1.8]" : "scale-100"}`} />
           </div>
-          <div className="px-5 py-6">
+          <div className="px-5 py-6 md:px-8 md:py-10 md:flex-1 md:overflow-y-auto">
             <h2 className="font-serif text-2xl leading-tight">{product.name}</h2>
             <p className="mt-2 text-lg">{product.priceLabel}</p>
             <p className="mt-4 text-[13px] text-muted-foreground leading-relaxed">
@@ -446,8 +455,8 @@ function CartDrawer({ open, onClose, cart, setCart }: {
 
 function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartOpen: () => void }) {
   return (
-    <div className="fixed inset-0 top-16 bg-background z-30 max-w-md mx-auto overflow-y-auto">
-      <nav className="px-6 pt-6">
+    <div className="fixed inset-0 top-16 md:top-20 bg-background z-30 overflow-y-auto">
+      <nav className="px-6 md:px-8 pt-6 max-w-2xl mx-auto">
         {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
           <button key={label} onClick={() => setView("products")}
                   className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
@@ -456,7 +465,7 @@ function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartO
           </button>
         ))}
       </nav>
-      <div className="px-6 mt-10 space-y-5 text-[13px] pb-16">
+      <div className="px-6 md:px-8 mt-10 space-y-5 text-[13px] pb-16 max-w-2xl mx-auto">
         <button onClick={onCartOpen} className="flex items-center gap-4 py-1">
           <ShoppingBag size={18} strokeWidth={1.5} /><span>Sacola</span>
         </button>
@@ -488,8 +497,8 @@ function SearchView({ setView, onDetails, onAdd }: {
   const single = filtered.length === 1;
 
   return (
-    <div className="fixed inset-0 top-0 bg-background z-50 max-w-md mx-auto overflow-y-auto">
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+    <div className="fixed inset-0 top-0 bg-background z-50 overflow-y-auto">
+      <div className="flex items-center gap-3 px-4 md:px-8 py-3 border-b border-border max-w-7xl mx-auto">
         <input autoFocus value={q} onChange={(e) => setQ(e.target.value)}
                placeholder="Pesquisar bolsas"
                className="flex-1 bg-muted px-3 py-2.5 text-[13px] outline-none" />
@@ -497,17 +506,21 @@ function SearchView({ setView, onDetails, onAdd }: {
           FECHAR
         </button>
       </div>
-      {filtered.length === 0 ? (
-        <div className="p-10 text-center text-sm text-muted-foreground">
-          Nenhum resultado para "{q}".
-        </div>
-      ) : single ? (
-        <SearchSingle p={filtered[0]} onDetails={onDetails} onAdd={onAdd} />
-      ) : (
-        <div className="grid grid-cols-2 gap-px bg-border">
-          {filtered.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
-        </div>
-      )}
+      <div className="max-w-7xl mx-auto">
+        {filtered.length === 0 ? (
+          <div className="p-10 text-center text-sm text-muted-foreground">
+            Nenhum resultado para "{q}".
+          </div>
+        ) : single ? (
+          <div className="max-w-md mx-auto">
+            <SearchSingle p={filtered[0]} onDetails={onDetails} onAdd={onAdd} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
+            {filtered.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
