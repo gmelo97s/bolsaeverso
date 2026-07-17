@@ -5,7 +5,7 @@ import {
   Globe, Instagram, ShoppingBag, Plus, Minus, Trash2, Check, ArrowUpDown,
 } from "lucide-react";
 
-import logoBV from "@/assets/logo-bv.png";
+
 
 import zadig from "@/assets/bolsas/Bolsa_Zadig_Voltare_Sunny_69_90.jpeg";
 import saintLaurent from "@/assets/bolsas/Bolsa_Saint_Laurent_Icare_Tote_Bag_Versão_Trançada_89_90.jpeg";
