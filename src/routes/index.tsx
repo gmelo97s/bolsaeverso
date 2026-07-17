@@ -497,8 +497,8 @@ function SearchView({ setView, onDetails, onAdd }: {
   const single = filtered.length === 1;
 
   return (
-    <div className="fixed inset-0 top-0 bg-background z-50 max-w-md mx-auto overflow-y-auto">
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+    <div className="fixed inset-0 top-0 bg-background z-50 overflow-y-auto">
+      <div className="flex items-center gap-3 px-4 md:px-8 py-3 border-b border-border max-w-7xl mx-auto">
         <input autoFocus value={q} onChange={(e) => setQ(e.target.value)}
                placeholder="Pesquisar bolsas"
                className="flex-1 bg-muted px-3 py-2.5 text-[13px] outline-none" />
@@ -506,17 +506,21 @@ function SearchView({ setView, onDetails, onAdd }: {
           FECHAR
         </button>
       </div>
-      {filtered.length === 0 ? (
-        <div className="p-10 text-center text-sm text-muted-foreground">
-          Nenhum resultado para "{q}".
-        </div>
-      ) : single ? (
-        <SearchSingle p={filtered[0]} onDetails={onDetails} onAdd={onAdd} />
-      ) : (
-        <div className="grid grid-cols-2 gap-px bg-border">
-          {filtered.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
-        </div>
-      )}
+      <div className="max-w-7xl mx-auto">
+        {filtered.length === 0 ? (
+          <div className="p-10 text-center text-sm text-muted-foreground">
+            Nenhum resultado para "{q}".
+          </div>
+        ) : single ? (
+          <div className="max-w-md mx-auto">
+            <SearchSingle p={filtered[0]} onDetails={onDetails} onAdd={onAdd} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
+            {filtered.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
