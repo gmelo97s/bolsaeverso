@@ -455,7 +455,7 @@ function CartDrawer({ open, onClose, cart, setCart }: {
 
 function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartOpen: () => void }) {
   return (
-    <div className="fixed inset-0 top-16 bg-background z-30 max-w-md mx-auto overflow-y-auto">
+    <div className="fixed inset-0 top-16 md:top-20 bg-background z-30 overflow-y-auto">
       <nav className="px-6 pt-6">
         {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
           <button key={label} onClick={() => setView("products")}
