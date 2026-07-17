@@ -307,7 +307,7 @@ function ProductDetail({ product, onClose, onAdd }: {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
          style={{ background: "color-mix(in oklab, black 40%, transparent)", backdropFilter: "blur(14px)" }}>
-      <div className="relative w-full max-w-md bg-background rounded-lg overflow-hidden shadow-2xl animate-scale-in"
+      <div className="relative w-full max-w-md md:max-w-4xl bg-background rounded-lg overflow-hidden shadow-2xl animate-scale-in"
            style={{ maxHeight: "92vh" }}>
         <button onClick={onClose} aria-label="Fechar"
                 className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-background/90 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors">
