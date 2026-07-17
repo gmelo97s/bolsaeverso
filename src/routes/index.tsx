@@ -106,7 +106,7 @@ function Home() {
   const sorted = useMemo(() => sortProducts(products, sort), [sort]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground max-w-md mx-auto relative">
+    <div className="min-h-screen bg-background text-foreground mx-auto relative w-full">
       <Header
         view={view} setView={setView}
         cartCount={cartCount} onCartOpen={() => setCartOpen(true)}
