@@ -27,6 +27,9 @@ import pavaoOuro from "@/assets/bolsas-new/Bolsa_Pavão_de_Ouro_69_90.jpeg.asset
 import safira from "@/assets/bolsas-new/Bolsa_Safira_89_90.jpeg.asset.json";
 import ranya from "@/assets/bolsas-new/Bolsa_Ranya_89_90.jpeg.asset.json";
 import donatelli from "@/assets/bolsas-new/Bolsa_Donatelli_lace_Lore_89_90.jpeg.asset.json";
+import grace from "@/assets/bolsas-new/Bolsa_Grace_Saint_Lourent_89_90.jpeg.asset.json";
+import stark from "@/assets/bolsas-new/Bolsa_Stark_69_90.jpeg.asset.json";
+import urban from "@/assets/bolsas-new/Bolsa_Urban_69_90.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,6 +64,9 @@ const products: Product[] = [
   { id: "safira", name: "Bolsa Safira", price: 89.9, priceLabel: "R$ 89,90", img: safira.url, isNew: true },
   { id: "ranya", name: "Bolsa Ranya", price: 89.9, priceLabel: "R$ 89,90", img: ranya.url, isNew: true },
   { id: "donatelli", name: "Bolsa Donatelli Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: donatelli.url, isNew: true },
+  { id: "grace", name: "Bolsa Grace Saint Lourent", price: 89.9, priceLabel: "R$ 89,90", img: grace.url, isNew: true },
+  { id: "stark", name: "Bolsa Stark", price: 69.9, priceLabel: "R$ 69,90", img: stark.url, isNew: true },
+  { id: "urban", name: "Bolsa Urban", price: 69.9, priceLabel: "R$ 69,90", img: urban.url, isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
@@ -248,11 +254,6 @@ function ProductCard({ p, onDetails, onAdd }: {
               className="relative aspect-square bg-surface overflow-hidden group">
         <img src={p.img} alt={p.name} loading="lazy"
              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        {p.isNew && (
-          <span className="absolute top-2 left-2 bg-foreground text-background text-[9px] tracking-[0.15em] px-1.5 py-0.5">
-            NOVO
-          </span>
-        )}
       </button>
       <h3 className="mt-3 text-[13px] leading-tight min-h-[2.6em]">{p.name}</h3>
       <p className="mt-1 text-[13px] font-medium">{p.priceLabel}</p>
