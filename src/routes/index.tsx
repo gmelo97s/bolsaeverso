@@ -7,22 +7,26 @@ import {
 
 
 
-import zadig from "@/assets/bolsas/Bolsa_Zadig_Voltare_Sunny_69_90.jpeg";
-import saintLaurent from "@/assets/bolsas/Bolsa_Saint_Laurent_Icare_Tote_Bag_Versão_Trançada_89_90.jpeg";
-import lauraLoren from "@/assets/bolsas/Bolsa_Off_White_Laura_Loren_89_90.jpeg";
-import bellaPaula from "@/assets/bolsas/Bolsa_Bella_Paula_69_90.jpeg";
-import laceLenco from "@/assets/bolsas/Lace_Lore_-_Com_LENÇO_89_90.jpeg";
-import laceOmbro from "@/assets/bolsas/Lace_Lore_-_Com_alça_no_ombro_89_90.jpeg";
-import trio49 from "@/assets/bolsas/49_90_cada.jpeg";
-import conjunto39 from "@/assets/bolsas/39_90_cada_ou_105_00_o_conjunto.jpeg";
-import tote129 from "@/assets/bolsas/129_90_2.jpeg";
-import hobo129 from "@/assets/bolsas/129_90.jpeg";
-import black6990 from "@/assets/bolsas/69_90_3.jpeg";
-import toteBege from "@/assets/bolsas/89_90_tote.jpeg";
-import besslina from "@/assets/bolsas/69_90_besslina.jpeg";
-import pretaNo from "@/assets/bolsas/69_90_preta.jpeg";
-import mochila2em1 from "@/assets/bolsas/mochila_2em1_129_90.jpeg";
-import laceHobo from "@/assets/bolsas/lace_lore_hobo_89_90.jpeg";
+import lolla from "@/assets/bolsas-new/Bolsa_Lolla_69_90.jpeg.asset.json";
+import rayka from "@/assets/bolsas-new/Bolsa_Rayka_129_90.jpeg.asset.json";
+import aysha from "@/assets/bolsas-new/Bolsa_Aysha_69_90.jpeg.asset.json";
+import scarlett from "@/assets/bolsas-new/Bolsa_Scarlett_89_90.jpeg.asset.json";
+import charlotte from "@/assets/bolsas-new/Bolsa_Charlotte_89_90.jpeg.asset.json";
+import yanca from "@/assets/bolsas-new/Bolsa_Yanca_69_90.jpeg.asset.json";
+import rubi from "@/assets/bolsas-new/Bolsa_Rubi_89_90.jpeg.asset.json";
+import lareLore from "@/assets/bolsas-new/Bolsa_Lare_Lore_89_90.jpeg.asset.json";
+import tersalia from "@/assets/bolsas-new/Bolsa_Tersalia_89_90.jpeg.asset.json";
+import luaLaceLore from "@/assets/bolsas-new/Bolsa_lua_Lace_Lore_89_90.jpeg.asset.json";
+import avsline from "@/assets/bolsas-new/Bolsa_Avsline_69_90.jpeg.asset.json";
+import joy from "@/assets/bolsas-new/Bolsa_Joy_59_90.jpeg.asset.json";
+import diamond from "@/assets/bolsas-new/Bolsa_Diamond_59_90.jpeg.asset.json";
+import siena from "@/assets/bolsas-new/Bolsa_Siena_89_90.jpeg.asset.json";
+import vicenza from "@/assets/bolsas-new/Bolsa_Vicenza_69_90.jpeg.asset.json";
+import saintLourent from "@/assets/bolsas-new/Bolsa_Saint_Lourent_iCare_Tote_Bag_Versão_Trançada_89_90.jpeg.asset.json";
+import pavaoOuro from "@/assets/bolsas-new/Bolsa_Pavão_de_Ouro_69_90.jpeg.asset.json";
+import safira from "@/assets/bolsas-new/Bolsa_Safira_89_90.jpeg.asset.json";
+import ranya from "@/assets/bolsas-new/Bolsa_Ranya_89_90.jpeg.asset.json";
+import donatelli from "@/assets/bolsas-new/Bolsa_Donatelli_lace_Lore_89_90.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,24 +40,27 @@ export const Route = createFileRoute("/")({
 
 type Product = { id: string; name: string; price: number; priceLabel: string; img: string; isNew?: boolean };
 
-// Ordem: lançamentos primeiro (isNew)
 const products: Product[] = [
-  { id: "black-6990", name: "Bolsa Executiva Preta com Fecho Dourado", price: 69.9, priceLabel: "R$ 69,90", img: black6990, isNew: true },
-  { id: "tote-bege", name: "Bolsa Tote Bege com Carteira", price: 89.9, priceLabel: "R$ 89,90", img: toteBege, isNew: true },
-  { id: "besslina", name: "Bolsa Besslina Hobo Redonda", price: 69.9, priceLabel: "R$ 69,90", img: besslina, isNew: true },
-  { id: "preta-no", name: "Bolsa Preta com Nó Trançado", price: 69.9, priceLabel: "R$ 69,90", img: pretaNo, isNew: true },
-  { id: "mochila-2em1", name: "Bolsa Mochila 2 em 1 Caramelo", price: 129.9, priceLabel: "R$ 129,90", img: mochila2em1, isNew: true },
-  { id: "lace-hobo", name: "Bolsa Lace Lore Hobo Monograma", price: 89.9, priceLabel: "R$ 89,90", img: laceHobo, isNew: true },
-  { id: "zadig", name: "Bolsa Zadig Voltare Sunny", price: 69.9, priceLabel: "R$ 69,90", img: zadig },
-  { id: "saint-laurent", name: "Bolsa Saint Laurent Icare Tote — Trançada", price: 89.9, priceLabel: "R$ 89,90", img: saintLaurent },
-  { id: "laura-loren", name: "Bolsa Off White Laura Loren", price: 89.9, priceLabel: "R$ 89,90", img: lauraLoren },
-  { id: "bella-paula", name: "Bolsa Bella Paula", price: 69.9, priceLabel: "R$ 69,90", img: bellaPaula },
-  { id: "lace-lenco", name: "Lace Lore — Com Lenço", price: 89.9, priceLabel: "R$ 89,90", img: laceLenco },
-  { id: "lace-ombro", name: "Lace Lore — Alça no Ombro", price: 89.9, priceLabel: "R$ 89,90", img: laceOmbro },
-  { id: "trio-49", name: "Bolsa Chain Flap (marrom, off-white ou terracota)", price: 49.9, priceLabel: "R$ 49,90 cada", img: trio49 },
-  { id: "conjunto-39", name: "Bolsa Matelassê Taupe (P, M ou G)", price: 39.9, priceLabel: "R$ 39,90 · R$ 105,00 conjunto", img: conjunto39 },
-  { id: "tote-129", name: "Bolsa Tote Caramelo com Tassel", price: 129.9, priceLabel: "R$ 129,90", img: tote129 },
-  { id: "hobo-129", name: "Bolsa Hobo Chocolate", price: 129.9, priceLabel: "R$ 129,90", img: hobo129 },
+  { id: "lolla", name: "Bolsa Lolla", price: 69.9, priceLabel: "R$ 69,90", img: lolla.url, isNew: true },
+  { id: "rayka", name: "Bolsa Rayka", price: 129.9, priceLabel: "R$ 129,90", img: rayka.url, isNew: true },
+  { id: "aysha", name: "Bolsa Aysha", price: 69.9, priceLabel: "R$ 69,90", img: aysha.url, isNew: true },
+  { id: "scarlett", name: "Bolsa Scarlett", price: 89.9, priceLabel: "R$ 89,90", img: scarlett.url, isNew: true },
+  { id: "charlotte", name: "Bolsa Charlotte", price: 89.9, priceLabel: "R$ 89,90", img: charlotte.url, isNew: true },
+  { id: "yanca", name: "Bolsa Yanca", price: 69.9, priceLabel: "R$ 69,90", img: yanca.url, isNew: true },
+  { id: "rubi", name: "Bolsa Rubi", price: 89.9, priceLabel: "R$ 89,90", img: rubi.url, isNew: true },
+  { id: "lare-lore", name: "Bolsa Lare Lore", price: 89.9, priceLabel: "R$ 89,90", img: lareLore.url, isNew: true },
+  { id: "tersalia", name: "Bolsa Tersalia", price: 89.9, priceLabel: "R$ 89,90", img: tersalia.url, isNew: true },
+  { id: "lua-lace-lore", name: "Bolsa Lua Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: luaLaceLore.url, isNew: true },
+  { id: "avsline", name: "Bolsa Avsline", price: 69.9, priceLabel: "R$ 69,90", img: avsline.url, isNew: true },
+  { id: "joy", name: "Bolsa Joy", price: 59.9, priceLabel: "R$ 59,90", img: joy.url, isNew: true },
+  { id: "diamond", name: "Bolsa Diamond", price: 59.9, priceLabel: "R$ 59,90", img: diamond.url, isNew: true },
+  { id: "siena", name: "Bolsa Siena", price: 89.9, priceLabel: "R$ 89,90", img: siena.url, isNew: true },
+  { id: "vicenza", name: "Bolsa Vicenza", price: 69.9, priceLabel: "R$ 69,90", img: vicenza.url, isNew: true },
+  { id: "saint-lourent", name: "Bolsa Saint Lourent iCare Tote — Trançada", price: 89.9, priceLabel: "R$ 89,90", img: saintLourent.url, isNew: true },
+  { id: "pavao-ouro", name: "Bolsa Pavão de Ouro", price: 69.9, priceLabel: "R$ 69,90", img: pavaoOuro.url, isNew: true },
+  { id: "safira", name: "Bolsa Safira", price: 89.9, priceLabel: "R$ 89,90", img: safira.url, isNew: true },
+  { id: "ranya", name: "Bolsa Ranya", price: 89.9, priceLabel: "R$ 89,90", img: ranya.url, isNew: true },
+  { id: "donatelli", name: "Bolsa Donatelli Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: donatelli.url, isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
