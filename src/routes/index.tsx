@@ -27,6 +27,9 @@ import pavaoOuro from "@/assets/bolsas-new/Bolsa_Pavão_de_Ouro_69_90.jpeg.asset
 import safira from "@/assets/bolsas-new/Bolsa_Safira_89_90.jpeg.asset.json";
 import ranya from "@/assets/bolsas-new/Bolsa_Ranya_89_90.jpeg.asset.json";
 import donatelli from "@/assets/bolsas-new/Bolsa_Donatelli_lace_Lore_89_90.jpeg.asset.json";
+import grace from "@/assets/bolsas-new/Bolsa_Grace_Saint_Lourent_89_90.jpeg.asset.json";
+import stark from "@/assets/bolsas-new/Bolsa_Stark_69_90.jpeg.asset.json";
+import urban from "@/assets/bolsas-new/Bolsa_Urban_69_90.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,6 +64,9 @@ const products: Product[] = [
   { id: "safira", name: "Bolsa Safira", price: 89.9, priceLabel: "R$ 89,90", img: safira.url, isNew: true },
   { id: "ranya", name: "Bolsa Ranya", price: 89.9, priceLabel: "R$ 89,90", img: ranya.url, isNew: true },
   { id: "donatelli", name: "Bolsa Donatelli Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: donatelli.url, isNew: true },
+  { id: "grace", name: "Bolsa Grace Saint Lourent", price: 89.9, priceLabel: "R$ 89,90", img: grace.url, isNew: true },
+  { id: "stark", name: "Bolsa Stark", price: 69.9, priceLabel: "R$ 69,90", img: stark.url, isNew: true },
+  { id: "urban", name: "Bolsa Urban", price: 69.9, priceLabel: "R$ 69,90", img: urban.url, isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
@@ -142,7 +148,7 @@ function Header({ view, setView, cartCount, onCartOpen }: {
   const isOverlay = view !== "products";
   return (
     <header className="sticky top-0 z-40 bg-background border-b border-border">
-      <div className="flex items-center justify-between px-4 md:px-8 h-16 md:h-20 max-w-7xl mx-auto">
+      <div className="flex items-center justify-between px-4 md:px-8 h-16 md:h-20 w-full">
         <div className="flex items-center gap-5 flex-1 min-w-0">
           <button aria-label="Menu" onClick={() => setView(isOverlay ? "products" : "menu")}>
             {isOverlay ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
@@ -226,12 +232,12 @@ function ProductsView({ list, sort, setSort, onDetails, onAdd }: {
   onDetails: (p: Product) => void; onAdd: (p: Product) => void;
 }) {
   return (
-    <main className="max-w-7xl mx-auto">
+    <main className="w-full">
       <div className="flex items-center justify-between px-4 md:px-8 py-4 text-xs tracking-wider">
         <span>{list.length} PRODUTOS</span>
         <SortMenu sort={sort} setSort={setSort} />
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-px bg-border">
         {list.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
       </div>
       <AddressFooter />
@@ -248,11 +254,6 @@ function ProductCard({ p, onDetails, onAdd }: {
               className="relative aspect-square bg-surface overflow-hidden group">
         <img src={p.img} alt={p.name} loading="lazy"
              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        {p.isNew && (
-          <span className="absolute top-2 left-2 bg-foreground text-background text-[9px] tracking-[0.15em] px-1.5 py-0.5">
-            NOVO
-          </span>
-        )}
       </button>
       <h3 className="mt-3 text-[13px] leading-tight min-h-[2.6em]">{p.name}</h3>
       <p className="mt-1 text-[13px] font-medium">{p.priceLabel}</p>
