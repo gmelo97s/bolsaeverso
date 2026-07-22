@@ -148,7 +148,7 @@ function Header({ view, setView, cartCount, onCartOpen }: {
   const isOverlay = view !== "products";
   return (
     <header className="sticky top-0 z-40 bg-background border-b border-border">
-      <div className="flex items-center justify-between px-4 md:px-8 h-16 md:h-20 max-w-7xl mx-auto">
+      <div className="flex items-center justify-between px-4 md:px-8 h-16 md:h-20 w-full">
         <div className="flex items-center gap-5 flex-1 min-w-0">
           <button aria-label="Menu" onClick={() => setView(isOverlay ? "products" : "menu")}>
             {isOverlay ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
@@ -232,12 +232,12 @@ function ProductsView({ list, sort, setSort, onDetails, onAdd }: {
   onDetails: (p: Product) => void; onAdd: (p: Product) => void;
 }) {
   return (
-    <main className="max-w-7xl mx-auto">
+    <main className="w-full">
       <div className="flex items-center justify-between px-4 md:px-8 py-4 text-xs tracking-wider">
         <span>{list.length} PRODUTOS</span>
         <SortMenu sort={sort} setSort={setSort} />
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-px bg-border">
         {list.map((p) => <ProductCard key={p.id} p={p} onDetails={onDetails} onAdd={onAdd} />)}
       </div>
       <AddressFooter />
