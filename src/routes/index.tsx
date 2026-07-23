@@ -76,6 +76,15 @@ const products: Product[] = [
   { id: "grace", name: "Bolsa Grace Saint Lourent", price: 89.9, priceLabel: "R$ 89,90", img: grace.url, isNew: true },
   { id: "stark", name: "Bolsa Stark", price: 69.9, priceLabel: "R$ 69,90", img: stark.url, isNew: true },
   { id: "urban", name: "Bolsa Urban", price: 69.9, priceLabel: "R$ 69,90", img: urban.url, isNew: true },
+  { id: "zenith", name: "Bolsa Zenith", price: 79.9, priceLabel: "R$ 79,90", img: zenith.url, isNew: true },
+  { id: "vibe", name: "Bolsa Vibe", price: 69.9, priceLabel: "R$ 69,90", img: vibe.url, isNew: true },
+  { id: "fiorella", name: "Bolsa Fiorella", price: 79.9, priceLabel: "R$ 79,90", img: fiorella.url, isNew: true },
+  { id: "lilly", name: "Bolsa Tiracolo Lilly", price: 59.9, priceLabel: "R$ 59,90", img: lilly.url, isNew: true },
+  { id: "dotty", name: "Bolsa Tiracolo Dotty", price: 59.9, priceLabel: "R$ 59,90", img: dotty.url, isNew: true },
+  { id: "saffiano-black", name: "Bolsa Saffiano Couro Alça Caramelo (Preta)", price: 99.9, priceLabel: "R$ 99,90", img: saffianoBlack.url, isNew: true },
+  { id: "saffiano-brown", name: "Bolsa Saffiano de Couro Alça Caramelo (Marrom)", price: 99.9, priceLabel: "R$ 99,90", img: saffianoBrown.url, isNew: true },
+  { id: "kids-mochila", name: "Bolsa Kids Mochila", price: 59.9, priceLabel: "R$ 59,90", img: kidsMochila.url, isNew: true },
+  { id: "monarca", name: "Bolsa Monarca", price: 119.0, priceLabel: "R$ 119,00", img: monarca.url, isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
