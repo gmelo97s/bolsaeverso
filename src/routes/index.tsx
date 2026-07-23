@@ -30,6 +30,15 @@ import donatelli from "@/assets/bolsas-new/Bolsa_Donatelli_lace_Lore_89_90.jpeg.
 import grace from "@/assets/bolsas-new/Bolsa_Grace_Saint_Lourent_89_90.jpeg.asset.json";
 import stark from "@/assets/bolsas-new/Bolsa_Stark_69_90.jpeg.asset.json";
 import urban from "@/assets/bolsas-new/Bolsa_Urban_69_90.jpeg.asset.json";
+import zenith from "@/assets/bolsas-new/Bolsa_Zenith_79_90.jpeg.asset.json";
+import vibe from "@/assets/bolsas-new/Bolsa_Vibe_69_90.jpeg.asset.json";
+import fiorella from "@/assets/bolsas-new/Bolsa_Fiorella_79_90.jpeg.asset.json";
+import lilly from "@/assets/bolsas-new/Bolsa_tiracolo_Lilly_59_90.jpeg.asset.json";
+import dotty from "@/assets/bolsas-new/Bolsa_tiracolo_Dotty_59_90.jpeg.asset.json";
+import saffianoBlack from "@/assets/bolsas-new/Bolsa_Saffiano_couro_com_alça_caramelo_99_90.jpeg.asset.json";
+import saffianoBrown from "@/assets/bolsas-new/Bolsa_Saffiano_de_couro_com_alça_caramelo_99_90.jpeg.asset.json";
+import kidsMochila from "@/assets/bolsas-new/Bolsa_Kids_Mochila_59_90.jpeg.asset.json";
+import monarca from "@/assets/bolsas-new/Bolsa_Monarca_119_00.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
