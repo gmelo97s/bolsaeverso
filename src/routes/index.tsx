@@ -7,39 +7,6 @@ import {
 
 
 
-import lolla from "@/assets/bolsas-new/Bolsa_Lolla_69_90.jpeg.asset.json";
-import rayka from "@/assets/bolsas-new/Bolsa_Rayka_129_90.jpeg.asset.json";
-import aysha from "@/assets/bolsas-new/Bolsa_Aysha_69_90.jpeg.asset.json";
-import scarlett from "@/assets/bolsas-new/Bolsa_Scarlett_89_90.jpeg.asset.json";
-import charlotte from "@/assets/bolsas-new/Bolsa_Charlotte_89_90.jpeg.asset.json";
-import yanca from "@/assets/bolsas-new/Bolsa_Yanca_69_90.jpeg.asset.json";
-import rubi from "@/assets/bolsas-new/Bolsa_Rubi_89_90.jpeg.asset.json";
-import lareLore from "@/assets/bolsas-new/Bolsa_Lare_Lore_89_90.jpeg.asset.json";
-import tersalia from "@/assets/bolsas-new/Bolsa_Tersalia_89_90.jpeg.asset.json";
-import luaLaceLore from "@/assets/bolsas-new/Bolsa_lua_Lace_Lore_89_90.jpeg.asset.json";
-import avsline from "@/assets/bolsas-new/Bolsa_Avsline_69_90.jpeg.asset.json";
-import joy from "@/assets/bolsas-new/Bolsa_Joy_59_90.jpeg.asset.json";
-import diamond from "@/assets/bolsas-new/Bolsa_Diamond_59_90.jpeg.asset.json";
-import siena from "@/assets/bolsas-new/Bolsa_Siena_89_90.jpeg.asset.json";
-import vicenza from "@/assets/bolsas-new/Bolsa_Vicenza_69_90.jpeg.asset.json";
-import saintLourent from "@/assets/bolsas-new/Bolsa_Saint_Lourent_iCare_Tote_Bag_Versão_Trançada_89_90.jpeg.asset.json";
-import pavaoOuro from "@/assets/bolsas-new/Bolsa_Pavão_de_Ouro_69_90.jpeg.asset.json";
-import safira from "@/assets/bolsas-new/Bolsa_Safira_89_90.jpeg.asset.json";
-import ranya from "@/assets/bolsas-new/Bolsa_Ranya_89_90.jpeg.asset.json";
-import donatelli from "@/assets/bolsas-new/Bolsa_Donatelli_lace_Lore_89_90.jpeg.asset.json";
-import grace from "@/assets/bolsas-new/Bolsa_Grace_Saint_Lourent_89_90.jpeg.asset.json";
-import stark from "@/assets/bolsas-new/Bolsa_Stark_69_90.jpeg.asset.json";
-import urban from "@/assets/bolsas-new/Bolsa_Urban_69_90.jpeg.asset.json";
-import zenith from "@/assets/bolsas-new/Bolsa_Zenith_79_90.jpeg.asset.json";
-import vibe from "@/assets/bolsas-new/Bolsa_Vibe_69_90.jpeg.asset.json";
-import fiorella from "@/assets/bolsas-new/Bolsa_Fiorella_79_90.jpeg.asset.json";
-import lilly from "@/assets/bolsas-new/Bolsa_tiracolo_Lilly_59_90.jpeg.asset.json";
-import dotty from "@/assets/bolsas-new/Bolsa_tiracolo_Dotty_59_90.jpeg.asset.json";
-import saffianoBlack from "@/assets/bolsas-new/Bolsa_Saffiano_couro_com_alça_caramelo_99_90.jpeg.asset.json";
-import saffianoBrown from "@/assets/bolsas-new/Bolsa_Saffiano_de_couro_com_alça_caramelo_99_90.jpeg.asset.json";
-import kidsMochila from "@/assets/bolsas-new/Bolsa_Kids_Mochila_59_90.jpeg.asset.json";
-import monarca from "@/assets/bolsas-new/Bolsa_Monarca_119_00.jpeg.asset.json";
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -50,41 +17,57 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-type Product = { id: string; name: string; price: number; priceLabel: string; img: string; isNew?: boolean };
+type Category = "bolsa" | "perfume";
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  priceLabel: string;
+  img: string;
+  category: Category;
+  isNew?: boolean;
+};
 
 const products: Product[] = [
-  { id: "lolla", name: "Bolsa Lolla", price: 69.9, priceLabel: "R$ 69,90", img: lolla.url, isNew: true },
-  { id: "rayka", name: "Bolsa Rayka", price: 129.9, priceLabel: "R$ 129,90", img: rayka.url, isNew: true },
-  { id: "aysha", name: "Bolsa Aysha", price: 69.9, priceLabel: "R$ 69,90", img: aysha.url, isNew: true },
-  { id: "scarlett", name: "Bolsa Scarlett", price: 89.9, priceLabel: "R$ 89,90", img: scarlett.url, isNew: true },
-  { id: "charlotte", name: "Bolsa Charlotte", price: 89.9, priceLabel: "R$ 89,90", img: charlotte.url, isNew: true },
-  { id: "yanca", name: "Bolsa Yanca", price: 69.9, priceLabel: "R$ 69,90", img: yanca.url, isNew: true },
-  { id: "rubi", name: "Bolsa Rubi", price: 89.9, priceLabel: "R$ 89,90", img: rubi.url, isNew: true },
-  { id: "lare-lore", name: "Bolsa Lare Lore", price: 89.9, priceLabel: "R$ 89,90", img: lareLore.url, isNew: true },
-  { id: "tersalia", name: "Bolsa Tersalia", price: 89.9, priceLabel: "R$ 89,90", img: tersalia.url, isNew: true },
-  { id: "lua-lace-lore", name: "Bolsa Lua Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: luaLaceLore.url, isNew: true },
-  { id: "avsline", name: "Bolsa Avsline", price: 69.9, priceLabel: "R$ 69,90", img: avsline.url, isNew: true },
-  { id: "joy", name: "Bolsa Joy", price: 59.9, priceLabel: "R$ 59,90", img: joy.url, isNew: true },
-  { id: "diamond", name: "Bolsa Diamond", price: 59.9, priceLabel: "R$ 59,90", img: diamond.url, isNew: true },
-  { id: "siena", name: "Bolsa Siena", price: 89.9, priceLabel: "R$ 89,90", img: siena.url, isNew: true },
-  { id: "vicenza", name: "Bolsa Vicenza", price: 69.9, priceLabel: "R$ 69,90", img: vicenza.url, isNew: true },
-  { id: "saint-lourent", name: "Bolsa Saint Lourent iCare Tote — Trançada", price: 89.9, priceLabel: "R$ 89,90", img: saintLourent.url, isNew: true },
-  { id: "pavao-ouro", name: "Bolsa Pavão de Ouro", price: 69.9, priceLabel: "R$ 69,90", img: pavaoOuro.url, isNew: true },
-  { id: "safira", name: "Bolsa Safira", price: 89.9, priceLabel: "R$ 89,90", img: safira.url, isNew: true },
-  { id: "ranya", name: "Bolsa Ranya", price: 89.9, priceLabel: "R$ 89,90", img: ranya.url, isNew: true },
-  { id: "donatelli", name: "Bolsa Donatelli Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: donatelli.url, isNew: true },
-  { id: "grace", name: "Bolsa Grace Saint Lourent", price: 89.9, priceLabel: "R$ 89,90", img: grace.url, isNew: true },
-  { id: "stark", name: "Bolsa Stark", price: 69.9, priceLabel: "R$ 69,90", img: stark.url, isNew: true },
-  { id: "urban", name: "Bolsa Urban", price: 69.9, priceLabel: "R$ 69,90", img: urban.url, isNew: true },
-  { id: "zenith", name: "Bolsa Zenith", price: 79.9, priceLabel: "R$ 79,90", img: zenith.url, isNew: true },
-  { id: "vibe", name: "Bolsa Vibe", price: 69.9, priceLabel: "R$ 69,90", img: vibe.url, isNew: true },
-  { id: "fiorella", name: "Bolsa Fiorella", price: 79.9, priceLabel: "R$ 79,90", img: fiorella.url, isNew: true },
-  { id: "lilly", name: "Bolsa Tiracolo Lilly", price: 59.9, priceLabel: "R$ 59,90", img: lilly.url, isNew: true },
-  { id: "dotty", name: "Bolsa Tiracolo Dotty", price: 59.9, priceLabel: "R$ 59,90", img: dotty.url, isNew: true },
-  { id: "saffiano-black", name: "Bolsa Saffiano Couro Alça Caramelo (Preta)", price: 99.9, priceLabel: "R$ 99,90", img: saffianoBlack.url, isNew: true },
-  { id: "saffiano-brown", name: "Bolsa Saffiano de Couro Alça Caramelo (Marrom)", price: 99.9, priceLabel: "R$ 99,90", img: saffianoBrown.url, isNew: true },
-  { id: "kids-mochila", name: "Bolsa Kids Mochila", price: 59.9, priceLabel: "R$ 59,90", img: kidsMochila.url, isNew: true },
-  { id: "monarca", name: "Bolsa Monarca", price: 119.0, priceLabel: "R$ 119,00", img: monarca.url, isNew: true },
+  { id: "lolla", name: "Bolsa Lolla", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/lolla.jpeg", category: "bolsa", isNew: true },
+  { id: "rayka", name: "Bolsa Rayka", price: 129.9, priceLabel: "R$ 129,90", img: "/bolsas/rayka.jpeg", category: "bolsa", isNew: true },
+  { id: "aysha", name: "Bolsa Aysha", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/aysha.jpeg", category: "bolsa", isNew: true },
+  { id: "scarlett", name: "Bolsa Scarlett", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/scarlett.jpeg", category: "bolsa", isNew: true },
+  { id: "charlotte", name: "Bolsa Charlotte", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/charlotte.jpeg", category: "bolsa", isNew: true },
+  { id: "yanca", name: "Bolsa Yanca", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/yanca.jpeg", category: "bolsa", isNew: true },
+  { id: "rubi", name: "Bolsa Rubi", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/rubi.jpeg?v=2", category: "bolsa", isNew: true },
+  { id: "lare-lore", name: "Bolsa Lare Lore", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/lare-lore.jpeg", category: "bolsa", isNew: true },
+  { id: "tersalia", name: "Bolsa Tersalia", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/tersalia.jpeg", category: "bolsa", isNew: true },
+  { id: "lua-lace-lore", name: "Bolsa Lua Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/lua-lace-lore.jpeg?v=2", category: "bolsa", isNew: true },
+  { id: "avsline", name: "Bolsa Avsline", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/avsline.jpeg", category: "bolsa", isNew: true },
+  { id: "joy", name: "Bolsa Joy", price: 59.9, priceLabel: "R$ 59,90", img: "/bolsas/joy.jpeg", category: "bolsa", isNew: true },
+  { id: "diamond", name: "Bolsa Diamond", price: 59.9, priceLabel: "R$ 59,90", img: "/bolsas/diamond.jpeg", category: "bolsa", isNew: true },
+  { id: "siena", name: "Bolsa Siena", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/siena.jpeg", category: "bolsa", isNew: true },
+  { id: "vicenza", name: "Bolsa Vicenza", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/vicenza.jpeg", category: "bolsa", isNew: true },
+  { id: "saint-lourent", name: "Bolsa Saint Lourent iCare Tote — Trançada", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/saint-lourent.jpeg", category: "bolsa", isNew: true },
+  { id: "pavao-ouro", name: "Bolsa Pavão de Ouro", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/pavao-ouro.jpeg", category: "bolsa", isNew: true },
+  { id: "safira", name: "Bolsa Safira", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/safira.jpeg?v=2", category: "bolsa", isNew: true },
+  { id: "ranya", name: "Bolsa Ranya", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/ranya.jpeg", category: "bolsa", isNew: true },
+  { id: "donatelli", name: "Bolsa Donatelli Lace Lore", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/donatelli.jpeg", category: "bolsa", isNew: true },
+  { id: "grace", name: "Bolsa Grace Saint Lourent", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/grace.jpeg", category: "bolsa", isNew: true },
+  { id: "stark", name: "Bolsa Stark", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/stark.jpeg?v=2", category: "bolsa", isNew: true },
+  { id: "urban", name: "Bolsa Urban", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/urban.jpeg", category: "bolsa", isNew: true },
+  { id: "zenith", name: "Bolsa Zenith", price: 79.9, priceLabel: "R$ 79,90", img: "/bolsas/zenith.jpeg?v=2", category: "bolsa", isNew: true },
+  { id: "vibe", name: "Bolsa Vibe", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/vibe.jpeg", category: "bolsa", isNew: true },
+  { id: "fiorella", name: "Bolsa Fiorella", price: 79.9, priceLabel: "R$ 79,90", img: "/bolsas/fiorella.jpeg", category: "bolsa", isNew: true },
+  { id: "lilly", name: "Bolsa Tiracolo Lilly", price: 59.9, priceLabel: "R$ 59,90", img: "/bolsas/lilly.jpeg", category: "bolsa", isNew: true },
+  { id: "dotty", name: "Bolsa Tiracolo Dotty", price: 59.9, priceLabel: "R$ 59,90", img: "/bolsas/dotty.jpeg", category: "bolsa", isNew: true },
+  { id: "saffiano-black", name: "Bolsa Saffiano Couro Alça Caramelo (Preta)", price: 99.9, priceLabel: "R$ 99,90", img: "/bolsas/saffiano-black.jpeg", category: "bolsa", isNew: true },
+  { id: "saffiano-brown", name: "Bolsa Saffiano de Couro Alça Caramelo (Marrom)", price: 99.9, priceLabel: "R$ 99,90", img: "/bolsas/saffiano-brown.jpeg", category: "bolsa", isNew: true },
+  { id: "kids-mochila", name: "Bolsa Kids Mochila", price: 59.9, priceLabel: "R$ 59,90", img: "/bolsas/kids-mochila.jpeg", category: "bolsa", isNew: true },
+  { id: "monarca", name: "Bolsa Monarca", price: 119.9, priceLabel: "R$ 119,90", img: "/bolsas/monarca.jpeg?v=2", category: "bolsa", isNew: true },
+  { id: "onyx", name: "Bolsa Mochila Onyx", price: 79.9, priceLabel: "R$ 79,90", img: "/bolsas/onyx.jpeg", category: "bolsa", isNew: true },
+  { id: "classic", name: "Bolsas Classic (conjunto)", price: 140.0, priceLabel: "R$ 140,00", img: "/bolsas/classic.jpeg", category: "bolsa", isNew: true },
+  { id: "dotty-rosa", name: "Bolsa Dotty Rosa", price: 69.9, priceLabel: "R$ 69,90", img: "/bolsas/dotty-rosa.jpeg", category: "bolsa", isNew: true },
+  { id: "judy", name: "Bolsa Judy", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/judy.jpeg", category: "bolsa", isNew: true },
+  { id: "satche", name: "Bolsa Satche Branca e Detalhes Preto", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/satche.jpeg", category: "bolsa", isNew: true },
+  { id: "gucci-padlock", name: "Gucci Padlock Supreme Shoulder Bag", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/gucci-padlock.jpeg", category: "bolsa", isNew: true },
+  { id: "lattafa-asad", name: "Lattafa ASAD", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/lattafa-asad.jpeg", category: "perfume", isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
@@ -95,6 +78,7 @@ const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 type View = "products" | "menu" | "search";
 type CartItem = { product: Product; qty: number };
 type SortKey = "novidades" | "maior" | "menor";
+type CatalogFilter = "todos" | "bolsas" | "perfumes";
 
 const SORT_LABEL: Record<SortKey, string> = {
   novidades: "Lançamentos",
@@ -110,6 +94,12 @@ function sortProducts(list: Product[], key: SortKey) {
   return copy;
 }
 
+function filterProducts(list: Product[], filter: CatalogFilter) {
+  if (filter === "bolsas") return list.filter((p) => p.category === "bolsa");
+  if (filter === "perfumes") return list.filter((p) => p.category === "perfume");
+  return list;
+}
+
 function Home() {
   const [view, setView] = useState<View>("products");
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -117,6 +107,7 @@ function Home() {
   const [detail, setDetail] = useState<Product | null>(null);
   const [toast, setToast] = useState<Product | null>(null);
   const [sort, setSort] = useState<SortKey>("novidades");
+  const [catalogFilter, setCatalogFilter] = useState<CatalogFilter>("todos");
 
   const addToCart = (p: Product) => {
     setCart((c) => {
@@ -134,7 +125,15 @@ function Home() {
   }, [toast]);
 
   const cartCount = cart.reduce((n, i) => n + i.qty, 0);
-  const sorted = useMemo(() => sortProducts(products, sort), [sort]);
+  const sorted = useMemo(
+    () => sortProducts(filterProducts(products, catalogFilter), sort),
+    [sort, catalogFilter],
+  );
+
+  const openCatalog = (filter: CatalogFilter) => {
+    setCatalogFilter(filter);
+    setView("products");
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground mx-auto relative w-full">
@@ -145,7 +144,7 @@ function Home() {
       {view === "products" && (
         <ProductsView list={sorted} sort={sort} setSort={setSort} onDetails={setDetail} onAdd={addToCart} />
       )}
-      {view === "menu" && <MenuView setView={setView} onCartOpen={() => setCartOpen(true)} />}
+      {view === "menu" && <MenuView onSelect={openCatalog} onCartOpen={() => setCartOpen(true)} />}
       {view === "search" && <SearchView setView={setView} onDetails={setDetail} onAdd={addToCart} />}
 
       {detail && (
@@ -370,6 +369,10 @@ function CartDrawer({ open, onClose, cart, setCart }: {
   const [address, setAddress] = useState("");
 
   const total = cart.reduce((s, i) => s + i.product.price * i.qty, 0);
+  const hasConsult = cart.some((i) => i.product.price <= 0);
+  const totalLabel = hasConsult
+    ? (total > 0 ? `R$ ${total.toFixed(2).replace(".", ",")} + itens a consultar` : "Valor a consultar")
+    : `R$ ${total.toFixed(2).replace(".", ",")}`;
 
   const updateQty = (id: string, delta: number) => {
     setCart((c) => c.flatMap((i) => {
@@ -388,7 +391,7 @@ function CartDrawer({ open, onClose, cart, setCart }: {
     const deliveryLine = delivery === "retirar"
       ? "Formato de entrega: Retirar na loja"
       : `Formato de entrega: Receber em casa\nEndereço: ${address}`;
-    const msg = `Olá, gostaria de fazer o pedido do item(s) abaixo:\n\n${lines}\n\nTotal: R$ ${total.toFixed(2).replace(".", ",")}\n\n${deliveryLine}`;
+    const msg = `Olá, gostaria de fazer o pedido do item(s) abaixo:\n\n${lines}\n\nTotal: ${totalLabel}\n\n${deliveryLine}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
@@ -466,7 +469,7 @@ function CartDrawer({ open, onClose, cart, setCart }: {
           <div className="border-t border-border p-4 space-y-3">
             <div className="flex justify-between text-[13px]">
               <span>Total</span>
-              <span className="font-medium">R$ {total.toFixed(2).replace(".", ",")}</span>
+              <span className="font-medium">{totalLabel}</span>
             </div>
             <button onClick={handleOrder} disabled={!canOrder}
                     className="w-full py-3.5 text-[12px] tracking-[0.2em] bg-foreground text-background flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition-opacity">
@@ -479,14 +482,22 @@ function CartDrawer({ open, onClose, cart, setCart }: {
   );
 }
 
-function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartOpen: () => void }) {
+function MenuView({ onSelect, onCartOpen }: {
+  onSelect: (filter: CatalogFilter) => void;
+  onCartOpen: () => void;
+}) {
+  const items: { label: string; filter: CatalogFilter }[] = [
+    { label: "Novidades", filter: "todos" },
+    { label: "Bolsas", filter: "bolsas" },
+    { label: "Perfumes", filter: "perfumes" },
+  ];
   return (
     <div className="fixed inset-0 top-16 md:top-20 bg-background z-30 overflow-y-auto">
       <nav className="px-6 md:px-8 pt-6 max-w-2xl mx-auto">
-        {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
-          <button key={label} onClick={() => setView("products")}
+        {items.map((item) => (
+          <button key={item.label} onClick={() => onSelect(item.filter)}
                   className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
-            <span className="font-medium">{label}</span>
+            <span className="font-medium">{item.label}</span>
             <ChevronRight size={18} strokeWidth={1.5} />
           </button>
         ))}
