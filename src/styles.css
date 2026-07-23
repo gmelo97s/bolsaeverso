@@ -47,3 +47,11 @@
   animation: slide-in-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes slide-in-left {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+.animate-slide-in-left {
+  animation: slide-in-left 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+

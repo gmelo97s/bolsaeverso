@@ -30,6 +30,15 @@ import donatelli from "@/assets/bolsas-new/Bolsa_Donatelli_lace_Lore_89_90.jpeg.
 import grace from "@/assets/bolsas-new/Bolsa_Grace_Saint_Lourent_89_90.jpeg.asset.json";
 import stark from "@/assets/bolsas-new/Bolsa_Stark_69_90.jpeg.asset.json";
 import urban from "@/assets/bolsas-new/Bolsa_Urban_69_90.jpeg.asset.json";
+import zenith from "@/assets/bolsas-new/Bolsa_Zenith_79_90.jpeg.asset.json";
+import vibe from "@/assets/bolsas-new/Bolsa_Vibe_69_90.jpeg.asset.json";
+import fiorella from "@/assets/bolsas-new/Bolsa_Fiorella_79_90.jpeg.asset.json";
+import lilly from "@/assets/bolsas-new/Bolsa_tiracolo_Lilly_59_90.jpeg.asset.json";
+import dotty from "@/assets/bolsas-new/Bolsa_tiracolo_Dotty_59_90.jpeg.asset.json";
+import saffianoBlack from "@/assets/bolsas-new/Bolsa_Saffiano_couro_com_alça_caramelo_99_90.jpeg.asset.json";
+import saffianoBrown from "@/assets/bolsas-new/Bolsa_Saffiano_de_couro_com_alça_caramelo_99_90.jpeg.asset.json";
+import kidsMochila from "@/assets/bolsas-new/Bolsa_Kids_Mochila_59_90.jpeg.asset.json";
+import monarca from "@/assets/bolsas-new/Bolsa_Monarca_119_00.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -67,6 +76,15 @@ const products: Product[] = [
   { id: "grace", name: "Bolsa Grace Saint Lourent", price: 89.9, priceLabel: "R$ 89,90", img: grace.url, isNew: true },
   { id: "stark", name: "Bolsa Stark", price: 69.9, priceLabel: "R$ 69,90", img: stark.url, isNew: true },
   { id: "urban", name: "Bolsa Urban", price: 69.9, priceLabel: "R$ 69,90", img: urban.url, isNew: true },
+  { id: "zenith", name: "Bolsa Zenith", price: 79.9, priceLabel: "R$ 79,90", img: zenith.url, isNew: true },
+  { id: "vibe", name: "Bolsa Vibe", price: 69.9, priceLabel: "R$ 69,90", img: vibe.url, isNew: true },
+  { id: "fiorella", name: "Bolsa Fiorella", price: 79.9, priceLabel: "R$ 79,90", img: fiorella.url, isNew: true },
+  { id: "lilly", name: "Bolsa Tiracolo Lilly", price: 59.9, priceLabel: "R$ 59,90", img: lilly.url, isNew: true },
+  { id: "dotty", name: "Bolsa Tiracolo Dotty", price: 59.9, priceLabel: "R$ 59,90", img: dotty.url, isNew: true },
+  { id: "saffiano-black", name: "Bolsa Saffiano Couro Alça Caramelo (Preta)", price: 99.9, priceLabel: "R$ 99,90", img: saffianoBlack.url, isNew: true },
+  { id: "saffiano-brown", name: "Bolsa Saffiano de Couro Alça Caramelo (Marrom)", price: 99.9, priceLabel: "R$ 99,90", img: saffianoBrown.url, isNew: true },
+  { id: "kids-mochila", name: "Bolsa Kids Mochila", price: 59.9, priceLabel: "R$ 59,90", img: kidsMochila.url, isNew: true },
+  { id: "monarca", name: "Bolsa Monarca", price: 119.0, priceLabel: "R$ 119,00", img: monarca.url, isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
@@ -463,32 +481,40 @@ function CartDrawer({ open, onClose, cart, setCart }: {
 
 function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartOpen: () => void }) {
   return (
-    <div className="fixed inset-0 top-16 md:top-20 bg-background z-30 overflow-y-auto">
-      <nav className="px-6 md:px-8 pt-6 max-w-2xl mx-auto">
-        {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
-          <button key={label} onClick={() => setView("products")}
-                  className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
-            <span className="font-medium">{label}</span>
-            <ChevronRight size={18} strokeWidth={1.5} />
+    <div
+      className="fixed inset-0 top-16 md:top-20 z-30 md:bg-black/30 md:animate-fade-in"
+      onClick={() => setView("products")}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-background h-full overflow-y-auto md:w-[420px] md:shadow-2xl md:animate-slide-in-left"
+      >
+        <nav className="px-6 md:px-8 pt-6">
+          {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
+            <button key={label} onClick={() => setView("products")}
+                    className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
+              <span className="font-medium">{label}</span>
+              <ChevronRight size={18} strokeWidth={1.5} />
+            </button>
+          ))}
+        </nav>
+        <div className="px-6 md:px-8 mt-10 space-y-5 text-[13px] pb-16">
+          <button onClick={onCartOpen} className="flex items-center gap-4 py-1">
+            <ShoppingBag size={18} strokeWidth={1.5} /><span>Sacola</span>
           </button>
-        ))}
-      </nav>
-      <div className="px-6 md:px-8 mt-10 space-y-5 text-[13px] pb-16 max-w-2xl mx-auto">
-        <button onClick={onCartOpen} className="flex items-center gap-4 py-1">
-          <ShoppingBag size={18} strokeWidth={1.5} /><span>Sacola</span>
-        </button>
-        <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
-          <Instagram size={18} strokeWidth={1.5} /><span>@fesoncini</span>
-        </a>
-        <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
-          <WhatsAppIcon size={18} /><span>WhatsApp (11) 98859-7788</span>
-        </a>
-        <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex items-start gap-4 py-1">
-          <MapPin size={18} strokeWidth={1.5} className="mt-0.5" />
-          <span>{ADDRESS}</span>
-        </a>
-        <div className="flex items-center gap-4 py-1 text-muted-foreground">
-          <Globe size={18} strokeWidth={1.5} /><span>Brasil / Português</span>
+          <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
+            <Instagram size={18} strokeWidth={1.5} /><span>@fesoncini</span>
+          </a>
+          <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
+            <WhatsAppIcon size={18} /><span>WhatsApp (11) 98859-7788</span>
+          </a>
+          <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex items-start gap-4 py-1">
+            <MapPin size={18} strokeWidth={1.5} className="mt-0.5" />
+            <span>{ADDRESS}</span>
+          </a>
+          <div className="flex items-center gap-4 py-1 text-muted-foreground">
+            <Globe size={18} strokeWidth={1.5} /><span>Brasil / Português</span>
+          </div>
         </div>
       </div>
     </div>
