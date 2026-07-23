@@ -68,6 +68,9 @@ const products: Product[] = [
   { id: "satche", name: "Bolsa Satche Branca e Detalhes Preto", price: 89.9, priceLabel: "R$ 89,90", img: "/bolsas/satche.jpeg", category: "bolsa", isNew: true },
   { id: "gucci-padlock", name: "Gucci Padlock Supreme Shoulder Bag", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/gucci-padlock.jpeg", category: "bolsa", isNew: true },
   { id: "lattafa-asad", name: "Lattafa ASAD", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/lattafa-asad.jpeg", category: "perfume", isNew: true },
+  { id: "lattafa-asad-masculino", name: "Lattafa ASAD Masculino", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/lattafa-asad-masculino.jpeg", category: "perfume", isNew: true },
+  { id: "club-de-nuit", name: "Club de Nuit Intense Man (Armaf)", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/club-de-nuit.jpeg", category: "perfume", isNew: true },
+  { id: "leau-dissey", name: "L'Eau d'Issey Pour Homme (Issey Miyake)", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/leau-dissey.jpeg", category: "perfume", isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
