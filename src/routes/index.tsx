@@ -481,32 +481,40 @@ function CartDrawer({ open, onClose, cart, setCart }: {
 
 function MenuView({ setView, onCartOpen }: { setView: (v: View) => void; onCartOpen: () => void }) {
   return (
-    <div className="fixed inset-0 top-16 md:top-20 bg-background z-30 overflow-y-auto">
-      <nav className="px-6 md:px-8 pt-6 max-w-2xl mx-auto">
-        {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
-          <button key={label} onClick={() => setView("products")}
-                  className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
-            <span className="font-medium">{label}</span>
-            <ChevronRight size={18} strokeWidth={1.5} />
+    <div
+      className="fixed inset-0 top-16 md:top-20 z-30 md:bg-black/30 md:animate-fade-in"
+      onClick={() => setView("products")}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-background h-full overflow-y-auto md:w-[420px] md:shadow-2xl md:animate-slide-in-left"
+      >
+        <nav className="px-6 md:px-8 pt-6">
+          {["Novidades", "Bolsas", "Coleção Bolsa & Verso"].map((label) => (
+            <button key={label} onClick={() => setView("products")}
+                    className="w-full flex items-center justify-between py-4 border-b border-border text-left text-[15px]">
+              <span className="font-medium">{label}</span>
+              <ChevronRight size={18} strokeWidth={1.5} />
+            </button>
+          ))}
+        </nav>
+        <div className="px-6 md:px-8 mt-10 space-y-5 text-[13px] pb-16">
+          <button onClick={onCartOpen} className="flex items-center gap-4 py-1">
+            <ShoppingBag size={18} strokeWidth={1.5} /><span>Sacola</span>
           </button>
-        ))}
-      </nav>
-      <div className="px-6 md:px-8 mt-10 space-y-5 text-[13px] pb-16 max-w-2xl mx-auto">
-        <button onClick={onCartOpen} className="flex items-center gap-4 py-1">
-          <ShoppingBag size={18} strokeWidth={1.5} /><span>Sacola</span>
-        </button>
-        <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
-          <Instagram size={18} strokeWidth={1.5} /><span>@fesoncini</span>
-        </a>
-        <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
-          <WhatsAppIcon size={18} /><span>WhatsApp (11) 98859-7788</span>
-        </a>
-        <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex items-start gap-4 py-1">
-          <MapPin size={18} strokeWidth={1.5} className="mt-0.5" />
-          <span>{ADDRESS}</span>
-        </a>
-        <div className="flex items-center gap-4 py-1 text-muted-foreground">
-          <Globe size={18} strokeWidth={1.5} /><span>Brasil / Português</span>
+          <a href={INSTAGRAM} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
+            <Instagram size={18} strokeWidth={1.5} /><span>@fesoncini</span>
+          </a>
+          <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 py-1">
+            <WhatsAppIcon size={18} /><span>WhatsApp (11) 98859-7788</span>
+          </a>
+          <a href={MAPS_URL} target="_blank" rel="noreferrer" className="flex items-start gap-4 py-1">
+            <MapPin size={18} strokeWidth={1.5} className="mt-0.5" />
+            <span>{ADDRESS}</span>
+          </a>
+          <div className="flex items-center gap-4 py-1 text-muted-foreground">
+            <Globe size={18} strokeWidth={1.5} /><span>Brasil / Português</span>
+          </div>
         </div>
       </div>
     </div>
