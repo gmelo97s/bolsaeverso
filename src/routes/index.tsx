@@ -71,6 +71,7 @@ const products: Product[] = [
   { id: "lattafa-asad-masculino", name: "Lattafa ASAD Masculino", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/lattafa-asad-masculino.jpeg", category: "perfume", isNew: true },
   { id: "club-de-nuit", name: "Club de Nuit Intense Man (Armaf)", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/club-de-nuit.jpeg", category: "perfume", isNew: true },
   { id: "leau-dissey", name: "L'Eau d'Issey Pour Homme (Issey Miyake)", price: 0, priceLabel: "Valor a consultar", img: "/bolsas/leau-dissey.jpeg", category: "perfume", isNew: true },
+  { id: "cuba-royal", name: "Cuba Royal", price: 100, priceLabel: "R$ 100,00", img: "/bolsas/cuba-royal.jpeg", category: "perfume", isNew: true },
 ];
 
 const WHATSAPP = "5511988597788";
